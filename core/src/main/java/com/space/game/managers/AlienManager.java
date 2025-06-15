@@ -124,6 +124,11 @@ public class AlienManager {
                 x = 0 - SpaceGame.getGame().getWorldHeight()/20;
                 y = MathUtils.random(0, SpaceGame.getGame().getWorldHeight());
                 break;
+            default:
+                System.err.println("Índice de spawn inválido: " + index);
+                x = SpaceGame.getGame().getWorldWidth() / 2;
+                y = SpaceGame.getGame().getWorldHeight() / 2;
+                break;
         }
         return new Vector2(x, y);
     }
