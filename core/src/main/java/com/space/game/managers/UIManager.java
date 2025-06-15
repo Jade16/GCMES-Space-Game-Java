@@ -149,14 +149,12 @@ public class UIManager {
         // Desenha as instruções de iniciar e voltar na parte inferior da tela
         String startText = "Enter. Start";
         GlyphLayout startLayout = new GlyphLayout(font30, startText);
-        // float start_x = game.getWorldWidth() / 2 + game.getWorldWidth() / 4 - startLayout.width / 2;
         float start_x = (const_larg-1)*(game.getWorldWidth() / const_larg) - startLayout.width ;
         float start_y = game.getWorldHeight() * 0.1f; // Posição inferior
         font30.draw(batch, startText, start_x, start_y);
 
         String backText = "Backspace. Back";
         GlyphLayout backLayout = new GlyphLayout(font30, backText);
-        // float back_x = game.getWorldWidth() / 2 - game.getWorldWidth() / 4 - backLayout.width / 2;
         float back_x = game.getWorldWidth() / const_larg;
         float back_y = start_y;
         font30.draw(batch, backText, back_x, back_y);
@@ -202,7 +200,6 @@ public class UIManager {
 
         String backText = "Backspace. Back";
         GlyphLayout backLayout = new GlyphLayout(font30, backText);
-        // float back_x = game.getWorldWidth() / 2 - game.getWorldWidth() / 4 - backLayout.width / 2;
         float back_x = game.getWorldWidth() / 2 - backLayout.width / 2;
         float back_y = game.getWorldHeight() * 0.1f;
         font30.draw(batch, backText, back_x, back_y);
@@ -307,7 +304,6 @@ public class UIManager {
         float highscore_y = game.getWorldHeight() / 1.3f + highscoreLayout.height;
         font100.draw(batch, highscore, highscore_x, highscore_y);
 
-        // String scoreText = "Score: " + (spaceship.getKillCount());
         // GlyphLayout scoreLayout = new GlyphLayout(font100, scoreText);
         // font100.draw(batch, scoreText, game.getWorldWidth() / 2 - scoreLayout.width / 2, highscore_y - highscoreLayout.height * 2);
     

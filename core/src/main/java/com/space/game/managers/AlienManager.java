@@ -96,7 +96,6 @@ public class AlienManager {
                 
                 this.addAlien(alienPosition, alienScale, textureType, speed, config.getEnemyMovementPatterns().get(0));
                 config.getEnemyMovementPatterns().remove(0);
-                // config.enemyCount--;
             }
         }
     }

@@ -35,9 +35,7 @@ public class Spaceship{
         position = new Vector2(x_nave, y_nave);
 
         this.consecutiveKills = 0;
-        
-        // ammunitions = 49;
-        // kills = 0;
+
         this.bulletManager = bulletManager;
 
     }

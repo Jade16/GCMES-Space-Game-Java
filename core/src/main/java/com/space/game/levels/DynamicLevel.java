@@ -37,7 +37,6 @@ public class DynamicLevel implements Level {
         this.config = config;
         this.soundManager = SpaceGame.getGame().getSoundManager();
 
-        // background = new Background(textureManager, game);
         bulletManager = new BulletManager(textureManager, soundManager, gsm);
         spaceship = new Spaceship(textureManager, bulletManager);
 

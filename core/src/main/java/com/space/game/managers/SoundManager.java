@@ -182,7 +182,6 @@ public class SoundManager {
 
     public void playGameOverMusic() {
         if (gameover_music != null && !gameover_music.isPlaying()) {
-            // gameover_music.setLooping(true);
             gameover_music.setVolume(0.4f);
             gameover_music.play();
         }
