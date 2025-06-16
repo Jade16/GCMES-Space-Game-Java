@@ -63,6 +63,9 @@ public class InputManager extends InputAdapter {
                     SpaceGame.getGame().getSoundManager().resumeMusic();
                 }
                 break;
+            default:
+                System.out.println("Tecla não tratada: " + keycode);
+                return false;
         }
         return true;
     }
@@ -85,6 +88,9 @@ public class InputManager extends InputAdapter {
             case Keys.D:
                 turningRight = false;
                 break;
+            default:
+                System.out.println("Tecla liberada não tratada: " + keycode);
+                return false;
         }
         return true;
     }

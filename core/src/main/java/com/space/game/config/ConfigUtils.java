@@ -1,18 +1,11 @@
 package com.space.game.config;
 
-// import java.awt.GraphicsDevice;
-// import java.awt.GraphicsEnvironment;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 
 public class ConfigUtils {
 
     public static int get_windowWidth() {
-        // Obter a resolução da tela
-        // GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        // int screenWidth = gd.getDisplayMode().getWidth();
-
         // Obter a resolução da tela usando LibGDX
         DisplayMode displayMode = Gdx.graphics.getDisplayMode();
         int screenWidth = displayMode.width;

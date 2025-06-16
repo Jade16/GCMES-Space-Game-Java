@@ -37,7 +37,6 @@ public class DynamicLevel implements Level {
         this.config = config;
         this.soundManager = SpaceGame.getGame().getSoundManager();
 
-        // background = new Background(textureManager, game);
         bulletManager = new BulletManager(textureManager, soundManager, gsm);
         spaceship = new Spaceship(textureManager, bulletManager);
 
@@ -48,16 +47,16 @@ public class DynamicLevel implements Level {
         collisionManager = new CollisionManager(bulletManager, alienManager, spaceship, soundManager);
 
         alienManager.spawnAliens(spaceship);
-        uiManager.setHordas(config.levelNumber);
+        uiManager.setHordas(config.getLevelNumber());
 
-        if (config.levelNumber != 1) {
-            spaceship.incrementAmmunitions(config.ammunitions);
+        if (config.getLevelNumber() != 1) {
+            spaceship.incrementAmmunitions(config.getAmmunitions());
         }else{
-            spaceship.setAmmunitions(config.ammunitions);
+            spaceship.setAmmunitions(config.getAmmunitions());
         }
-        spaceship.setStreakCount(config.streak);
-        spaceship.setConsecutiveKills(config.consecutiveKills);
-        spaceship.setKillCount(config.kills);
+        spaceship.setStreakCount(config.getStreak());
+        spaceship.setConsecutiveKills(config.getConsecutiveKills());
+        spaceship.setKillCount(config.getKills());
 
         lastKillCount = -1;
 

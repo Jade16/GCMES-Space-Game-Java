@@ -43,11 +43,7 @@ public class Background {
         public Star() {
             x = MathUtils.random(Gdx.graphics.getWidth());
             y = MathUtils.random(Gdx.graphics.getHeight());
-            // brightness = MathUtils.random(1, 100);
-            // brightness_f = brightness / 100f;
-            // brightness = 0;
             size = MathUtils.random(2, 5);
-            // duration = 0;
         }
 
         public void update() {

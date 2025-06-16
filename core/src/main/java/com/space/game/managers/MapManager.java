@@ -9,7 +9,6 @@ import com.space.game.Game;
 import com.space.game.SpaceGame;
 
 public class MapManager {
-    //private Game game;
     private Level currentLevel;
     private LevelFactory levelFactory;
     private float waveTimer = 0;
@@ -18,7 +17,6 @@ public class MapManager {
 
     public MapManager(Game game) {
         this.levelFactory = new LevelFactory();
-        // this.game = game;
     }
 
     public void loadLevel(int levelNumber) {
@@ -38,8 +36,7 @@ public class MapManager {
         if (currentLevel != null) {
             currentLevel.render(batch);
             if (!waveActive) {
-                SpaceGame.getGame().getUiManager().displayNewLevel(waveTimer, TIME_TO_WAVE);
-                // System.out.println("Wave Timer: " + waveTimer);               
+                SpaceGame.getGame().getUiManager().displayNewLevel(waveTimer, TIME_TO_WAVE);             
             }
         }
 
@@ -47,13 +44,12 @@ public class MapManager {
 
     public void update() {
         if (currentLevel != null && currentLevel.getEndLevel()) {
-            loadLevel(currentLevel.getConfig().levelNumber + 1);
+            loadLevel(currentLevel.getConfig().getLevelNumber() + 1);
         }
         if (currentLevel != null && waveActive) {
             currentLevel.update();
         } 
         else if (currentLevel != null && !waveActive) {
-            // System.out.println("Wave Timer: " + waveTimer);
             waveTimer += Gdx.graphics.getDeltaTime();
             if (waveTimer >= TIME_TO_WAVE) {
                 waveActive = true;
