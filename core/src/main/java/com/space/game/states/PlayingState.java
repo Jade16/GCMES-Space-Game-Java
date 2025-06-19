@@ -27,7 +27,6 @@ public class PlayingState implements GameStateInterface {
             System.out.println("Loading level 1");
             this.mapManager.loadLevel(1);
         }
-        // soundManager.playMusic();
     }
 
     @Override
@@ -40,11 +39,6 @@ public class PlayingState implements GameStateInterface {
     @Override
     public State getState() {
         return State.PLAYING;
-    }
-
-    @Override
-    public void exit() {
-       
     }
     
 }

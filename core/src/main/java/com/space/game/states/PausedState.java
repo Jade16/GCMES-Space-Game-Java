@@ -48,11 +48,6 @@ public class PausedState implements GameStateInterface {
         return State.PAUSED;
     }
 
-    @Override
-    public void exit() {
-        
-    }
-
     private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             if (wasPlaying) {

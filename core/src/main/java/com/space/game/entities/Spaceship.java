@@ -35,9 +35,7 @@ public class Spaceship{
         position = new Vector2(x_nave, y_nave);
 
         this.consecutiveKills = 0;
-        
-        // ammunitions = 49;
-        // kills = 0;
+
         this.bulletManager = bulletManager;
 
     }
@@ -120,11 +118,6 @@ public class Spaceship{
     public Rectangle getBounds() {
         return new Rectangle(position.x, position.y, texture.getWidth() * scale, texture.getHeight() * scale);
     }
-
-    public void update() {
-
-    }
-
 
     public void render(SpriteBatch batch) {
         // Desenha a textura da nave com a rotação e a escala aplicadas

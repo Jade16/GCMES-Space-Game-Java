@@ -96,7 +96,6 @@ public class AlienManager {
                 
                 this.addAlien(alienPosition, alienScale, textureType, speed, config.getEnemyMovementPatterns().get(0));
                 config.getEnemyMovementPatterns().remove(0);
-                // config.enemyCount--;
             }
         }
     }
@@ -123,6 +122,11 @@ public class AlienManager {
             case 3: // Esquerda
                 x = 0 - SpaceGame.getGame().getWorldHeight()/20;
                 y = MathUtils.random(0, SpaceGame.getGame().getWorldHeight());
+                break;
+            default:
+                System.err.println("Índice de spawn inválido: " + index);
+                x = SpaceGame.getGame().getWorldWidth() / 2;
+                y = SpaceGame.getGame().getWorldHeight() / 2;
                 break;
         }
         return new Vector2(x, y);
