@@ -41,10 +41,5 @@ public class PlayingState implements GameStateInterface {
     public State getState() {
         return State.PLAYING;
     }
-
-    @Override
-    public void exit() {
-       
-    }
     
 }

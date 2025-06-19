@@ -121,11 +121,6 @@ public class Spaceship{
         return new Rectangle(position.x, position.y, texture.getWidth() * scale, texture.getHeight() * scale);
     }
 
-    public void update() {
-
-    }
-
-
     public void render(SpriteBatch batch) {
         // Desenha a textura da nave com a rotação e a escala aplicadas
         batch.draw( texture, 
