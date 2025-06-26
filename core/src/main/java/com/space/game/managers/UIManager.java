@@ -16,13 +16,13 @@ public class UIManager {
     private Game game;
     private SpriteBatch batch;
     private int hordas;
-    private final int const_larg = 21;
-    private Color cian_color;
+    private static final int CONST_LARG = 21;
+    private Color cyanColor;
 
     public UIManager(Game game, SpriteBatch batch) {
         this.game = game;
         this.batch = batch;
-        this.cian_color = new Color(0.0f, 1.0f, 1.0f, 1.0f);
+        this.cyanColor = new Color(0.0f, 1.0f, 1.0f, 1.0f);
 
         initializeFonts();
 
@@ -40,7 +40,7 @@ public class UIManager {
 
         parameter.size = (int) (100 * scaleFactor);
         parameter.borderWidth = 4 * scaleFactor;
-        parameter.borderColor = cian_color;
+        parameter.borderColor = cyanColor;
         parameter.color = Color.BLACK;
         font100 = generator.generateFont(parameter);
 
@@ -55,16 +55,16 @@ public class UIManager {
         // Desenha o título "SPACE GAME"
         String title = "SPACE GAME";
         GlyphLayout titleLayout = new GlyphLayout(font150, title);
-        float title_x = game.getWorldWidth() / const_larg;
+        float title_x = game.getWorldWidth() / CONST_LARG;
         float title_y = game.getWorldHeight()/1.5f + titleLayout.height;
         font150.draw(batch, title, title_x,  title_y);
 
         // Desenha o botão "New Game"
         String buttonText = "1. Start Arcade Mode";
         GlyphLayout buttonLayout = new GlyphLayout(font30, buttonText);
-        float buttonX = game.getWorldWidth() / const_larg;
+        float buttonX = game.getWorldWidth() / CONST_LARG;
         float buttonY = title_y - titleLayout.height*3;
-        font30.setColor(cian_color);
+        font30.setColor(cyanColor);
         font30.draw(batch, buttonText, buttonX, buttonY);
 
         // Condicional para mostrar ou esconder Global Scores
@@ -72,21 +72,21 @@ public class UIManager {
             // Desenha o botão "Global Scores"
             buttonText = "2. Global Scores";
             buttonLayout = new GlyphLayout(font30, buttonText);
-            buttonX = game.getWorldWidth() / const_larg;
+            buttonX = game.getWorldWidth() / CONST_LARG;
             buttonY = buttonY - buttonLayout.height*3;
             font30.draw(batch, buttonText, buttonX, buttonY);
 
             // Desenha o botão "Local Scores"
             buttonText = "3. Local Scores";
             buttonLayout = new GlyphLayout(font30, buttonText);
-            buttonX = game.getWorldWidth() / const_larg;
+            buttonX = game.getWorldWidth() / CONST_LARG;
             buttonY = buttonY - buttonLayout.height*3;
             font30.draw(batch, buttonText, buttonX, buttonY);
         } else {
             // Quando não há conexão, Local Scores fica como opção 2
             buttonText = "2. Local Scores";
             buttonLayout = new GlyphLayout(font30, buttonText);
-            buttonX = game.getWorldWidth() / const_larg;
+            buttonX = game.getWorldWidth() / CONST_LARG;
             buttonY = buttonY - buttonLayout.height*3;
             font30.draw(batch, buttonText, buttonX, buttonY);
         }
@@ -94,7 +94,7 @@ public class UIManager {
         // Desenha o botão "Exit"
         buttonText = "0. Exit";
         buttonLayout = new GlyphLayout(font30, buttonText);
-        buttonX = game.getWorldWidth() / const_larg;
+        buttonX = game.getWorldWidth() / CONST_LARG;
         buttonY = buttonY - buttonLayout.height*12;
         font30.draw(batch, buttonText, buttonX, buttonY);
     }
@@ -104,11 +104,11 @@ public class UIManager {
     
         String title = "GAME CONTROLS";
         GlyphLayout titleLayout = new GlyphLayout(font100, title);
-        float title_x = game.getWorldWidth() / const_larg;
+        float title_x = game.getWorldWidth() / CONST_LARG;
         float title_y = game.getWorldHeight() / 1.2f + titleLayout.height * scaleFactor;
         font100.draw(batch, title, title_x, title_y);
     
-        font30.setColor(cian_color);
+        font30.setColor(cyanColor);
         float startY = game.getWorldHeight() / 2 + 3 * 30 * scaleFactor; // 3 é o número de controles
     
         // Desenhar cabeçalhos da tabela
@@ -118,7 +118,7 @@ public class UIManager {
         GlyphLayout controlLayout = new GlyphLayout(font30, controlHeader);
         GlyphLayout actionLayout = new GlyphLayout(font30, actionHeader);
     
-        float actionX = game.getWorldWidth() / const_larg; // Espaçamento entre colunas
+        float actionX = game.getWorldWidth() / CONST_LARG; // Espaçamento entre colunas
         float controlX = actionX + actionLayout.width + 100 * scaleFactor;
     
         float headerY = startY + 60 * scaleFactor; // Cabeçalhos um pouco acima da lista de controles
@@ -147,48 +147,50 @@ public class UIManager {
         }
     
         // Desenha as instruções de iniciar e voltar na parte inferior da tela
-        String startText = "Enter. Start";
+        String startText = "Press SPACE to start, press P to pause";
         GlyphLayout startLayout = new GlyphLayout(font30, startText);
-        float start_x = (const_larg-1)*(game.getWorldWidth() / const_larg) - startLayout.width ;
-        float start_y = game.getWorldHeight() * 0.1f; // Posição inferior
-        font30.draw(batch, startText, start_x, start_y);
+        float startX = (CONST_LARG-1)*(game.getWorldWidth() / CONST_LARG) - startLayout.width ;
+        float instructionY = game.getWorldHeight() / 9f + startLayout.height;
+        font30.draw(batch, startText, startX, instructionY);
 
-        String backText = "Backspace. Back";
+        String backText = "Press ESC to go back to menu";
         GlyphLayout backLayout = new GlyphLayout(font30, backText);
-        float back_x = game.getWorldWidth() / const_larg;
-        float back_y = start_y;
-        font30.draw(batch, backText, back_x, back_y);
+        float backX = game.getWorldWidth() / CONST_LARG;
+        float backY = game.getWorldHeight() / 9f + backLayout.height;
+        font30.draw(batch, backText, backX, backY);
+
+        batch.setColor(Color.WHITE); // Restaura a cor padrão
     }
     
 
     public void displayGameInfo(Spaceship spaceship) {
         // Exibir informações do jogo como munição e hordas
         // Colocar cor branca
-        font30.setColor(cian_color);
+        font30.setColor(cyanColor);
         String ammoText = "AMMO: " + spaceship.getAmmunitions();
         GlyphLayout ammoLayout = new GlyphLayout(font30, ammoText);
-        float ammo_x = game.getWorldWidth() / const_larg;
-        float ammo_y = ammoLayout.height/2 + ammoLayout.height; // Posição inferior
-        font30.draw(batch, ammoText, ammo_x, ammo_y);
+        float ammoX = game.getWorldWidth() / CONST_LARG;
+        float ammoY = ammoLayout.height/2 + ammoLayout.height; // Posição inferior
+        font30.draw(batch, ammoText, ammoX, ammoY);
 
         String hordasText = "WAVE: " + hordas;
         GlyphLayout hordasLayout = new GlyphLayout(font30, hordasText);
-        float hordas_x = (const_larg-1)*(game.getWorldWidth() / const_larg) - hordasLayout.width;
-        float hordas_y = hordasLayout.height/2 + hordasLayout.height; // Posição inferior
-        font30.draw(batch, hordasText, hordas_x, hordas_y);
+        float hordasX = (CONST_LARG-1)*(game.getWorldWidth() / CONST_LARG) - hordasLayout.width;
+        float hordasY = hordasLayout.height/2 + hordasLayout.height; // Posição inferior
+        font30.draw(batch, hordasText, hordasX, hordasY);
 
         // Posição do X igual, mas Y no topo
         String killsText = "SCORE: " + (spaceship.getKillCount());
         GlyphLayout killsLayout = new GlyphLayout(font30, killsText);
-        float kills_x = game.getWorldWidth() / const_larg;
-        float kills_y = game.getWorldHeight() - killsLayout.height;
-        font30.draw(batch, killsText, kills_x, kills_y); 
+        float killsX = game.getWorldWidth() / CONST_LARG;
+        float killsY = game.getWorldHeight() - killsLayout.height;
+        font30.draw(batch, killsText, killsX, killsY); 
 
         String streakText = "STREAK: x" + spaceship.getStreakCount();
         GlyphLayout streakLayout = new GlyphLayout(font30, streakText);
-        float streak_x = (const_larg-1)*(game.getWorldWidth() / const_larg) - streakLayout.width;
-        float streak_y = game.getWorldHeight() - streakLayout.height;
-        font30.draw(batch, streakText, streak_x, streak_y);
+        float streakX = (CONST_LARG-1)*(game.getWorldWidth() / CONST_LARG) - streakLayout.width;
+        float streakY = game.getWorldHeight() - streakLayout.height;
+        font30.draw(batch, streakText, streakX, streakY);
 
     }
 
@@ -221,7 +223,7 @@ public class UIManager {
         font100.draw(batch, gameOverText, gameOver_x, gameOver_y);
         font100.setColor(0, 1, 1, 1); // Restaurar a cor padrão
 
-        String restartText = "Press Enter to Continue";
+        String restartText = "Press ENTER to continue";
         GlyphLayout restartLayout = new GlyphLayout(font30, restartText);
         font30.setColor(0, 1, 1, alpha);
         font30.draw(batch, restartText, game.getWorldWidth() / 2 - restartLayout.width / 2, gameOver_y - gameOverLayout.height * 2);
@@ -234,7 +236,7 @@ public class UIManager {
         GlyphLayout pausedLayout = new GlyphLayout(font100, pausedText);
         font100.draw(batch, pausedText, game.getWorldWidth() / 2 - pausedLayout.width / 2, game.getWorldHeight() / 1.3f + pausedLayout.height);
 
-        font30.setColor(cian_color);
+        font30.setColor(cyanColor);
         String restartText = "Backspace. Exit   |   Enter. Resume";
         GlyphLayout restartLayout = new GlyphLayout(font30, restartText);
         font30.draw(batch, restartText, game.getWorldWidth() / 2 - restartLayout.width / 2, game.getWorldHeight() / 1.3f - restartLayout.height * 3);
@@ -242,28 +244,28 @@ public class UIManager {
         // Exibir informações do jogo como munição e hordas
         String ammoText = "AMMO: " + spaceship.getAmmunitions();
         GlyphLayout ammoLayout = new GlyphLayout(font30, ammoText);
-        float ammo_x = game.getWorldWidth() / const_larg;
-        float ammo_y = ammoLayout.height/2 + ammoLayout.height; // Posição inferior
-        font30.draw(batch, ammoText, ammo_x, ammo_y);
+        float ammoX = game.getWorldWidth() / CONST_LARG;
+        float ammoY = ammoLayout.height/2 + ammoLayout.height; // Posição inferior
+        font30.draw(batch, ammoText, ammoX, ammoY);
 
         String hordasText = "WAVE: " + hordas;
         GlyphLayout hordasLayout = new GlyphLayout(font30, hordasText);
-        float hordas_x = (const_larg-1)*(game.getWorldWidth() / const_larg) - hordasLayout.width;
-        float hordas_y = hordasLayout.height/2 + hordasLayout.height; // Posição inferior
-        font30.draw(batch, hordasText, hordas_x, hordas_y);
+        float hordasX = (CONST_LARG-1)*(game.getWorldWidth() / CONST_LARG) - hordasLayout.width;
+        float hordasY = hordasLayout.height/2 + hordasLayout.height; // Posição inferior
+        font30.draw(batch, hordasText, hordasX, hordasY);
 
         // Posição do X igual, mas Y no topo
         String killsText = "SCORE: " + (spaceship.getKillCount());
         GlyphLayout killsLayout = new GlyphLayout(font30, killsText);
-        float kills_x = game.getWorldWidth() / const_larg;
-        float kills_y = game.getWorldHeight() - killsLayout.height;
-        font30.draw(batch, killsText, kills_x, kills_y); 
+        float killsX = game.getWorldWidth() / CONST_LARG;
+        float killsY = game.getWorldHeight() - killsLayout.height;
+        font30.draw(batch, killsText, killsX, killsY); 
 
         String streakText = "STREAK: x" + spaceship.getStreakCount();
         GlyphLayout streakLayout = new GlyphLayout(font30, streakText);
-        float streak_x = (const_larg-1)*(game.getWorldWidth() / const_larg) - streakLayout.width;
-        float streak_y = game.getWorldHeight() - streakLayout.height;
-        font30.draw(batch, streakText, streak_x, streak_y);
+        float streakX = (CONST_LARG-1)*(game.getWorldWidth() / CONST_LARG) - streakLayout.width;
+        float streakY = game.getWorldHeight() - streakLayout.height;
+        font30.draw(batch, streakText, streakX, streakY);
 
     }
 
@@ -307,7 +309,7 @@ public class UIManager {
         // GlyphLayout scoreLayout = new GlyphLayout(font100, scoreText);
         // font100.draw(batch, scoreText, game.getWorldWidth() / 2 - scoreLayout.width / 2, highscore_y - highscoreLayout.height * 2);
     
-        font30.setColor(cian_color);
+        font30.setColor(cyanColor);
         String playerText = "Player: " + playerName + (showCursor ? "_" : "  ");
         GlyphLayout playerLayout = new GlyphLayout(font30, playerText);
         float player_x = game.getWorldWidth() / 2 - playerLayout.width / 2;
@@ -316,13 +318,13 @@ public class UIManager {
     
         String continueText = "Enter. Save";
         GlyphLayout continueLayout = new GlyphLayout(font30, continueText);
-        float continue_x = (const_larg-1)*(game.getWorldWidth() / const_larg) - continueLayout.width;
+        float continue_x = (CONST_LARG-1)*(game.getWorldWidth() / CONST_LARG) - continueLayout.width;
         float continue_y = continueLayout.height/2 + continueLayout.height;
         font30.draw(batch, continueText, continue_x, continue_y);
 
         String cancelText = "0. Cancel";
         GlyphLayout cancelLayout = new GlyphLayout(font30, cancelText);
-        float cancel_x = game.getWorldWidth() / const_larg;
+        float cancel_x = game.getWorldWidth() / CONST_LARG;
         float cancel_y = cancelLayout.height/2 + cancelLayout.height;
         font30.draw(batch, cancelText, cancel_x, cancel_y);
     }
@@ -337,11 +339,11 @@ public class UIManager {
             title = "LOCAL HIGH SCORES";
         }
         GlyphLayout titleLayout = new GlyphLayout(font100, title);
-        float title_x = game.getWorldWidth() / const_larg;
+        float title_x = game.getWorldWidth() / CONST_LARG;
         float title_y = game.getWorldHeight() / 1.2f + titleLayout.height * scaleFactor;
         font100.draw(batch, title, title_x, title_y);
         
-        font30.setColor(cian_color);
+        font30.setColor(cyanColor);
         float startY = game.getWorldHeight() / 2 + (scoresList.size() / 2) * 30 * scaleFactor;
         
         // Desenhar cabeçalhos da tabela
@@ -353,7 +355,7 @@ public class UIManager {
         GlyphLayout playerLayout = new GlyphLayout(font30, playerHeader);
         GlyphLayout scoreLayout = new GlyphLayout(font30, scoreHeader);
         
-        float rankX = game.getWorldWidth() / const_larg;
+        float rankX = game.getWorldWidth() / CONST_LARG;
         float playerX = rankX + rankLayout.width + 20 * scaleFactor;  // Espaçamento entre colunas
         float scoreX = playerX + playerLayout.width + 200 * scaleFactor;
         
@@ -396,7 +398,7 @@ public class UIManager {
     
         String continueText = "Backspace. Back";
         GlyphLayout continueLayout = new GlyphLayout(font30, continueText);
-        font30.draw(batch, continueText, game.getWorldWidth() / const_larg, game.getWorldHeight() * 0.1f);
+        font30.draw(batch, continueText, game.getWorldWidth() / CONST_LARG, game.getWorldHeight() * 0.1f);
     }
     
 

@@ -37,6 +37,8 @@ public class ScoreManager {
     private static final String COLLECTION_NAME = "scores";
     private static final String FILE_PATH = "data/scores.csv";
 
+    private static final String ScoreManagerString = "ScoreManager";
+
     private MongoClient mongoClient;
     private MongoDatabase database;
     private MongoCollection<Document> collection;
@@ -50,13 +52,13 @@ public class ScoreManager {
             // Usa o sistema de arquivos do LibGDX para ler o arquivo dos assets
             FileHandle fileHandle = Gdx.files.internal("game.properties");
             if (!fileHandle.exists()) {
-                Gdx.app.error("ScoreManager", "Arquivo game.properties não encontrado");
+                Gdx.app.error(ScoreManagerString, "Arquivo game.properties não encontrado");
                 return null;
             }
             properties.load(fileHandle.reader());
             String connectionString = properties.getProperty("DB_CONNECTION_STRING");
             if (connectionString == null || connectionString.trim().isEmpty()) {
-                Gdx.app.error("ScoreManager", "DB_CONNECTION_STRING não encontrada ou vazia no game.properties");
+                Gdx.app.error(ScoreManagerString, "DB_CONNECTION_STRING não encontrada ou vazia no game.properties");
                 return null;
             }
             
@@ -71,12 +73,12 @@ public class ScoreManager {
             connectionString = connectionString.replace("\\=", "=");
             connectionString = connectionString.replace("\\&", "&");
             
-            Gdx.app.log("ScoreManager", "Connection string carregada: " + 
+            Gdx.app.log(ScoreManagerString, "Connection string carregada: " + 
                 connectionString.substring(0, Math.min(50, connectionString.length())) + "...");
             
             return connectionString;
         } catch (IOException e) {
-            Gdx.app.error("ScoreManager", "Não foi possível carregar game.properties", e);
+            Gdx.app.error(ScoreManagerString, "Não foi possível carregar game.properties", e);
             return null;
         }
     }
@@ -94,13 +96,13 @@ public class ScoreManager {
     public ScoreManager() {
         // Verifica se a connection string está disponível antes de tentar conectar
         if (CONNECTION_STRING == null || CONNECTION_STRING.trim().isEmpty()) {
-            Gdx.app.log("ScoreManager", "Connection string não disponível. Rodando apenas com scores locais.");
+            Gdx.app.log(ScoreManagerString, "Connection string não disponível. Rodando apenas com scores locais.");
             this.error = true;
             return;
         }
 
         try {
-            Gdx.app.log("ScoreManager", "Tentando conectar ao banco de dados...");
+            Gdx.app.log(ScoreManagerString, "Tentando conectar ao banco de dados...");
             ConnectionString connectionString = new ConnectionString(CONNECTION_STRING);
             ServerApi serverApi = ServerApi.builder()
                     .version(ServerApiVersion.V1)
@@ -116,10 +118,10 @@ public class ScoreManager {
             // Testa a conexão fazendo uma operação simples
             collection.countDocuments();
             
-            Gdx.app.log("ScoreManager", "Conectado com sucesso ao MongoDB!");
+            Gdx.app.log(ScoreManagerString, "Conectado com sucesso ao MongoDB!");
             this.error = false;
         } catch (Exception e) {
-            Gdx.app.error("ScoreManager", "Erro ao conectar com o banco de dados: " + e.getMessage());
+            Gdx.app.error(ScoreManagerString, "Erro ao conectar com o banco de dados: " + e.getMessage());
             e.printStackTrace();
             this.error = true;
             
@@ -128,7 +130,7 @@ public class ScoreManager {
                 try {
                     mongoClient.close();
                 } catch (Exception closeException) {
-                    Gdx.app.error("ScoreManager", "Erro ao fechar conexão: " + closeException.getMessage());
+                    Gdx.app.error(ScoreManagerString, "Erro ao fechar conexão: " + closeException.getMessage());
                 }
                 mongoClient = null;
                 database = null;
@@ -139,7 +141,7 @@ public class ScoreManager {
 
     public void saveGlobalScore(String playerName, int score) {
         if (this.error || collection == null) {
-            Gdx.app.log("ScoreManager", "Banco de dados não disponível. Score global não será salvo.");
+            Gdx.app.log(ScoreManagerString, "Banco de dados não disponível. Score global não será salvo.");
             return;
         }
         
@@ -162,9 +164,9 @@ public class ScoreManager {
                         .append("score", entry.score);
                 collection.insertOne(doc);
             }
-            Gdx.app.log("ScoreManager", "Score global de " + score + " salvo para o jogador " + playerName);
+            Gdx.app.log(ScoreManagerString, "Score global de " + score + " salvo para o jogador " + playerName);
         } catch (Exception e) {
-            Gdx.app.error("ScoreManager", "Erro ao salvar score global: " + e.getMessage());
+            Gdx.app.error(ScoreManagerString, "Erro ao salvar score global: " + e.getMessage());
             e.printStackTrace();
             this.error = true;
         }
@@ -172,7 +174,7 @@ public class ScoreManager {
 
     public List<ScoreEntry> loadGlobalScores() {
         if (this.error || collection == null) {
-            Gdx.app.log("ScoreManager", "Banco de dados não disponível. Retornando lista vazia.");
+            Gdx.app.log(ScoreManagerString, "Banco de dados não disponível. Retornando lista vazia.");
             return new ArrayList<>();
         }
         
@@ -189,7 +191,7 @@ public class ScoreManager {
             SpaceGame.getLogger().debug("Global scores loaded");
             return scoresList;
         } catch (Exception e) {
-            Gdx.app.error("ScoreManager", "Erro ao carregar scores globais: " + e.getMessage());
+            Gdx.app.error(ScoreManagerString, "Erro ao carregar scores globais: " + e.getMessage());
             e.printStackTrace();
             this.error = true;
             return new ArrayList<>();

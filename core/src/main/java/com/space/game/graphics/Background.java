@@ -11,8 +11,8 @@ public class Background {
     private Texture texture;
     private Texture starTexture;
     private Star[] stars;
-    private float alpha_background=0.25f;
-    private boolean alpha_bool = false;
+    private float alphaBackground=0.25f;
+    private boolean alphaBool = false;
     private static final int NUM_STARS = 500; // Número de estrelas
     private Game game;
    
@@ -28,14 +28,14 @@ public class Background {
             stars[i] = new Star();
             stars[i].brightness = MathUtils.random(1, 100);
             stars[i].duration = MathUtils.random(77, 777);
-            stars[i].brightness_f = stars[i].brightness / 100f;
+            stars[i].brightnessF = stars[i].brightness / 100f;
         }
     }
 
     private class Star {
         float x, y;
         int brightness;
-        float brightness_f;
+        float brightnessF;
         int size;
         int duration;
         
@@ -56,7 +56,7 @@ public class Background {
                 duration = MathUtils.random(77, 777);
                 brightness = MathUtils.random(1, 100);
             }
-            brightness_f = brightness / 100f;
+            brightnessF = brightness / 100f;
             // x -= 60 * Gdx.graphics.getDeltaTime(); // Move a estrela para a esquerda
             // brightness = MathUtils.random(0, 5); // E muda o brilho
             // if (x < 0) {
@@ -73,16 +73,16 @@ public class Background {
             star.update();
         }
 
-        if(alpha_bool == false){
-            alpha_background = MathUtils.clamp(alpha_background +0.000009f, 0.25f, 0.4f);
-            if(alpha_background >= 0.4f){
-                alpha_bool = true;
+        if(alphaBool == false){
+            alphaBackground = MathUtils.clamp(alphaBackground +0.000009f, 0.25f, 0.4f);
+            if(alphaBackground >= 0.4f){
+                alphaBool = true;
             }
         }
         else{
-            alpha_background = MathUtils.clamp(alpha_background -0.000009f, 0.25f, 0.4f);
-            if(alpha_background <= 0.25f){
-                alpha_bool = false;
+            alphaBackground = MathUtils.clamp(alphaBackground -0.000009f, 0.25f, 0.4f);
+            if(alphaBackground <= 0.25f){
+                alphaBool = false;
             }
         }
     }
@@ -91,7 +91,7 @@ public class Background {
         // Desenha as estrelas
         batch.setColor(Color.WHITE); // Restaura a cor padrão
         for (Star star : stars) {
-            batch.setColor(1, 1, 1, star.brightness_f); // Usa o brilho para ajustar a transparência
+            batch.setColor(1, 1, 1, star.brightnessF); // Usa o brilho para ajustar a transparência
             // randomizar o tamanho das estrelas
             batch.draw(starTexture, star.x, star.y, starTexture.getWidth()/star.size, starTexture.getHeight()/star.size); // Desenha uma pequena textura para cada estrela
         }
@@ -99,7 +99,7 @@ public class Background {
 
         
         batch.setColor(Color.WHITE); // Restaura a cor padrão
-        batch.setColor(1, 1, 1, alpha_background);
+        batch.setColor(1, 1, 1, alphaBackground);
         batch.draw(texture, 0, 0, game.getWorldWidth(), game.getWorldHeight());
         batch.setColor(Color.WHITE); // Restaura a cor padrão para evitar afetar outras texturas desenhadas na tela
 

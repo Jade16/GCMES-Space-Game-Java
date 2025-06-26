@@ -29,7 +29,7 @@ public class GameOverState implements GameStateInterface {
     private int whatHighScore;
 
     private float gameoverTimer = 0;
-    private final float TIME_TO_GAMEOVER = 7; // Tempo em segundos antes da próxima onda
+    private static final float TIME_TO_GAMEOVER = 7; // Tempo em segundos antes da próxima onda
 
     public GameOverState(GameStateManager gsm, MapManager mapManager, UIManager uiManager, SoundManager soundManager) {
         this.uiManager = uiManager;

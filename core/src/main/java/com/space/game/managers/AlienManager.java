@@ -18,7 +18,7 @@ import com.space.game.managers.GameStateManager.State;
 import com.space.game.config.LevelConfig;
 
 public class AlienManager {
-    private float scale_screen = ConfigUtils.calcularFatorDeEscala();
+    private float scaleScreen = ConfigUtils.calcularFatorDeEscala();
     private List<Alien> aliens;
     private TextureManager textureManager;
     private float deltaTime;
@@ -91,7 +91,7 @@ public class AlienManager {
                 Vector2 alienPosition = calculateAlienSpawnPosition(i, spaceship.getPosition());
                 // se config.enemySpeed for 100, então é para gerar numeros de 100 ate 130
                 float speed = MathUtils.random(config.getEnemySpeed(), config.getEnemySpeed() + 5);
-                float alienScale = 0.6f * scale_screen; 
+                float alienScale = 0.6f * scaleScreen; 
                 int textureType = 0; // Tipo de textura que pode ser variada para diferentes aliens
                 
                 this.addAlien(alienPosition, alienScale, textureType, speed, config.getEnemyMovementPatterns().get(0));
