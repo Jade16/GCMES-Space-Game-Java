@@ -41,4 +41,10 @@ public class PlayingState implements GameStateInterface {
         return State.PLAYING;
     }
     
+    @Override
+    public void exit() {
+        // Implementação do método exit - pode ser usado para limpeza quando saindo do estado de jogo
+        // Por enquanto deixamos vazio, mas pode ser expandido conforme necessário
+    }
+    
 }

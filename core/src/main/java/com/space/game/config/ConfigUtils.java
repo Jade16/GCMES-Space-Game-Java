@@ -4,39 +4,36 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics.DisplayMode;
 
 public class ConfigUtils {
-
-    public static int get_windowWidth() {
-        // Obter a resolução da tela usando LibGDX
-        DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-        int screenWidth = displayMode.width;
-
-        // Calcular o tamanho da janela como uma porcentagem da resolução do monitor
-        int windowWidth = (int) (screenWidth * 0.85f);
-        return windowWidth;
+    
+    private ConfigUtils() {
+        // Private constructor to hide the implicit public one
     }
 
-    public static int get_windowHeight() {
-        int windowWidth = get_windowWidth();
-        int windowHeight = (int) (windowWidth * 9 / 16);
-        return windowHeight;
+    public static int getWindowWidth() {
+        // Obter a resolução da tela usando LibGDX
+        DisplayMode displayMode = Gdx.graphics.getDisplayMode();
+
+        // Calcular o tamanho da janela como uma porcentagem da resolução do monitor
+        return (int) (displayMode.width * 0.85f);
+    }
+
+    public static int getWindowHeight() {
+        return getWindowWidth() * 9 / 16;
     }
 
     public static float calcularFatorDeEscala() {
         // Resolução base (onde a velocidade do tiro é 800)
-        float larguraBase = 1920;
-        float alturaBase = 1080;
+        float larguraBase = 1920f;
+        float alturaBase = 1080f;
     
         // Obter a resolução da tela atual
         DisplayMode displayMode = Gdx.graphics.getDisplayMode();
-        float larguraAtual = displayMode.width;
-        float alturaAtual = displayMode.height;
     
         // Calcula o fator de escala como a média geométrica das razões das resoluções
-        float fatorEscalaLargura = larguraAtual / larguraBase;
-        float fatorEscalaAltura = alturaAtual / alturaBase;
-        float fatorEscala = (float) Math.sqrt(fatorEscalaLargura * fatorEscalaAltura);
+        float fatorEscalaLargura = displayMode.width / larguraBase;
+        float fatorEscalaAltura = displayMode.height / alturaBase;
     
-        return fatorEscala;
+        return (float) Math.sqrt(fatorEscalaLargura * fatorEscalaAltura);
     }
     
     

@@ -46,7 +46,7 @@ public class AlienManager {
     }
 
     public void addAlien(Vector2 position, float scale, int textureType, float speed, int movementPattern) {
-        Alien newAlien = new Alien(textureManager, position, scale, textureType, speed, spaceship, movementPattern);
+        Alien newAlien = new Alien(textureManager, position, scale, textureType, speed, movementPattern);
         aliens.add(newAlien);
     }
 

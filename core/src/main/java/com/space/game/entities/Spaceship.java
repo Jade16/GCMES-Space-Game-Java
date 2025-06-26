@@ -40,6 +40,15 @@ public class Spaceship{
 
     }
 
+    public void update() {
+        // Método update para a nave espacial
+        // Por enquanto deixamos vazio, mas pode ser usado para:
+        // - Atualizar animações
+        // - Processar movimentos automáticos
+        // - Verificar estados internos
+        // - Outras atualizações relacionadas à nave
+    }
+
     public void incrementKillCount() {
         if (this.streak != 1) {
             this.kills = this.kills + this.streak;
@@ -123,7 +132,7 @@ public class Spaceship{
         // Desenha a textura da nave com a rotação e a escala aplicadas
         batch.draw( texture, 
                     position.x, position.y,                             // x e y da posição da nave
-                    texture.getWidth() / 2, texture.getHeight() / 2,    // x e y do ponto de origem da rotação
+                    texture.getWidth() / 2f, texture.getHeight() / 2f,    // x e y do ponto de origem da rotação
                     texture.getWidth(), texture.getHeight(),            // largura e altura da textura
                     scale, scale,                                       // escala em x e y
                     angle, 0, 0,                              // rotação e coordenadas da textura
