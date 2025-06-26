@@ -30,23 +30,31 @@ public class CollisionManager {
                 Alien alien = alienIterator.next();
                 if (alien.getBounds().overlaps(bullet.getBounds())) {
                     bullet.markForRemoval();
-                    if (!alien.isDead()) {
-                        // Se o alien não está morto, marcar como atingido pela primeira vez.
-                        spaceship.incrementKillCount();
-                        alien.hit(); // Muda a textura e inverte a direção.
-                        soundManager.playAlienHitSound();
-                        spaceship.incrementCosecutiveKills();
-                    } else {
-                        // Se já está morto e foi atingido novamente, marcar para remoção.
-                        alien.markForImmediateRemoval();
-                        soundManager.playDeadAlienHitSound();
-                    }
-                    // Se o streak não está no máximo e o jogador fez 3 kills consecutivos, incrementar streak.
-                    if (spaceship.getStreakCount() < 7 && spaceship.getConsecutiveKills() >= 3){
-                        spaceship.incrementStreakCount();
-                    }
+                    handleAlienHit(alien);
+                    checkAndUpdateStreak();
                 }
             }
+        }
+    }
+
+    private void handleAlienHit(Alien alien) {
+        if (!alien.isDead()) {
+            // Se o alien não está morto, marcar como atingido pela primeira vez.
+            spaceship.incrementKillCount();
+            alien.hit(); // Muda a textura e inverte a direção.
+            soundManager.playAlienHitSound();
+            spaceship.incrementCosecutiveKills();
+        } else {
+            // Se já está morto e foi atingido novamente, marcar para remoção.
+            alien.markForImmediateRemoval();
+            soundManager.playDeadAlienHitSound();
+        }
+    }
+
+    private void checkAndUpdateStreak() {
+        // Se o streak não está no máximo e o jogador fez 3 kills consecutivos, incrementar streak.
+        if (spaceship.getStreakCount() < 7 && spaceship.getConsecutiveKills() >= 3) {
+            spaceship.incrementStreakCount();
         }
     }
 

@@ -12,20 +12,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class SoundManager {
-    private float volume_sound = 0.5f; // Volume padrão é 1.0 (máximo)
-    private float volume_music = 0.25f; // Volume padrão é 1.0 (máximo)
+    private float volumeSound = 0.5f; // Volume padrão é 1.0 (máximo)
+    private float volumeMusic = 0.25f; // Volume padrão é 1.0 (máximo)
     private Sound bulletSound;
     private Sound hitAlienSound;
     private Sound hitDeadAlienSound;
-    private Music menu_music;
-    private Music gameover_music;
+    private Music menuMusic;
+    private Music gameoverMusic;
 
     private List<Music> playlist;
     private int currentTrackIndex = 0;
 
     public void loadSounds() {
-        menu_music = Gdx.audio.newMusic(Gdx.files.internal("musics/menu/Echoes of the Last Stand.mp3"));
-        gameover_music = Gdx.audio.newMusic(Gdx.files.internal("musics/gameover/gameover.mp3"));
+        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("musics/menu/Echoes of the Last Stand.mp3"));
+        gameoverMusic = Gdx.audio.newMusic(Gdx.files.internal("musics/gameover/gameover.mp3"));
 
         bulletSound = Gdx.audio.newSound(Gdx.files.internal("sounds/Spaceshipshot.wav")); 
         hitAlienSound = Gdx.audio.newSound(Gdx.files.internal("sounds/hitAlien.wav")); 
@@ -83,7 +83,7 @@ public class SoundManager {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.size();
         playlist.get(currentTrackIndex).setPosition(0);
         playlist.get(currentTrackIndex).play();
-        playlist.get(currentTrackIndex).setVolume(volume_music);
+        playlist.get(currentTrackIndex).setVolume(volumeMusic);
     }
 
     public void playPreviousTrack() {
@@ -97,7 +97,7 @@ public class SoundManager {
         currentTrackIndex = (currentTrackIndex - 1 + playlist.size()) % playlist.size();
         playlist.get(currentTrackIndex).setPosition(0);
         playlist.get(currentTrackIndex).play();
-        playlist.get(currentTrackIndex).setVolume(volume_music);
+        playlist.get(currentTrackIndex).setVolume(volumeMusic);
     }
 
     public void playMusic() {
@@ -111,7 +111,7 @@ public class SoundManager {
         // resetar a música para o início
         playlist.get(currentTrackIndex).setPosition(0);
         playlist.get(currentTrackIndex).setLooping(false);
-        playlist.get(currentTrackIndex).setVolume(volume_music);
+        playlist.get(currentTrackIndex).setVolume(volumeMusic);
         playlist.get(currentTrackIndex).play();
     }
 
@@ -136,73 +136,71 @@ public class SoundManager {
         }
     }
 
-
-
-    public void set_VolumeSound(float volume) {
+    public void setVolumeSound(float volume) {
         if (volume < 0.0f) {
-            this.volume_sound = 0.0f;
+            this.volumeSound = 0.0f;
         } else if (volume > 1.0f) {
-            this.volume_sound = 1.0f;
+            this.volumeSound = 1.0f;
         } else {
-            this.volume_sound = volume;
+            this.volumeSound = volume;
         }
     }
 
     public float getVolumeSound() {
-        return this.volume_sound;
+        return this.volumeSound;
     }
 
-    public void set_VolumeMusic(float volume) {
+    public void setVolumeMusic(float volume) {
         if (volume < 0.0f) {
-            this.volume_music = 0.0f;
+            this.volumeMusic = 0.0f;
         } else if (volume > 1.0f) {
-            this.volume_music = 1.0f;
+            this.volumeMusic = 1.0f;
         } else {
-            this.volume_music = volume;
+            this.volumeMusic = volume;
         }
     }
 
     public float getVolumeMusic() {
-        return this.volume_music;
+        return this.volumeMusic;
     }
 
     public void playMenuMusic() {
-        if (menu_music != null && !menu_music.isPlaying()) {
-            menu_music.setLooping(true);
-            menu_music.setVolume(0.4f);
-            menu_music.play();
+        if (menuMusic != null && !menuMusic.isPlaying()) {
+            menuMusic.setLooping(true);
+            menuMusic.setVolume(0.4f);
+            menuMusic.play();
         }
     }
 
     public void stopMenuMusic() {
-        if (menu_music != null && menu_music.isPlaying()) {
-            menu_music.stop();
+        if (menuMusic != null && menuMusic.isPlaying()) {
+            menuMusic.stop();
         }
     }
 
     public void playGameOverMusic() {
-        if (gameover_music != null && !gameover_music.isPlaying()) {
-            gameover_music.setVolume(0.4f);
-            gameover_music.play();
+        if (gameoverMusic != null && !gameoverMusic.isPlaying()) {
+            gameoverMusic.setVolume(0.4f);
+            gameoverMusic.play();
         }
     }
 
     public void stopGameOverMusic() {
-        if (gameover_music != null && gameover_music.isPlaying()) {
-            gameover_music.stop();
+        if (gameoverMusic != null && gameoverMusic.isPlaying()) {
+            gameoverMusic.stop();
         }
     }
 
     public void playBulletSound() {
-        bulletSound.play(volume_sound);
+        bulletSound.play(volumeSound);
     }
 
     public void playAlienHitSound() {
-        hitAlienSound.play(volume_sound);
+        hitAlienSound.play(volumeSound);
     }
 
     public void playDeadAlienHitSound() {
-        hitDeadAlienSound.play(volume_sound);
+        hitDeadAlienSound.play(volumeSound);
     }
 
     public boolean isPlaying() {
@@ -213,7 +211,7 @@ public class SoundManager {
         bulletSound.dispose();
         hitAlienSound.dispose();
         hitDeadAlienSound.dispose();
-        menu_music.dispose();
+        menuMusic.dispose();
         if (playlist == null) return;
         else if (playlist.isEmpty()) return;
         else {

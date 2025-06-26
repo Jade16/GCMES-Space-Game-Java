@@ -17,7 +17,7 @@ public class Spaceship{
     private BulletManager bulletManager;
     private float angle = 0;
 
-    private float x_nave, y_nave;
+    private float xNave, yNave;
 
     private float scale;
     private Vector2 position = new Vector2(0, 0);
@@ -30,9 +30,9 @@ public class Spaceship{
         scale = Math.min(SpaceGame.getGame().getWorldWidth() / (float)texture.getWidth(), SpaceGame.getGame().getWorldHeight() / (float)texture.getHeight());
         scale *= 0.075f;
 
-        x_nave = SpaceGame.getGame().getWorldWidth()/2f - texture.getWidth()*scale / 2f  ;
-        y_nave = SpaceGame.getGame().getWorldHeight()/2f - texture.getHeight()*scale / 2f ;
-        position = new Vector2(x_nave, y_nave);
+        xNave = SpaceGame.getGame().getWorldWidth()/2f - texture.getWidth()*scale / 2f  ;
+        yNave = SpaceGame.getGame().getWorldHeight()/2f - texture.getHeight()*scale / 2f ;
+        position = new Vector2(xNave, yNave);
 
         this.consecutiveKills = 0;
 
