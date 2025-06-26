@@ -12,7 +12,7 @@ public class MapManager {
     private Level currentLevel;
     private LevelFactory levelFactory;
     private float waveTimer = 0;
-    private final float TIME_TO_WAVE = 3; // Tempo em segundos antes da próxima onda
+    private static final float TIME_TO_WAVE = 3; // Tempo em segundos antes da próxima onda
     private boolean waveActive;
 
     public MapManager(Game game) {
