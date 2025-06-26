@@ -29,19 +29,19 @@ public class Bullet {
         float bulletHeight = texture.getHeight();
 
         // Considera o centro da nave como o ponto de origem
-        float centerX = spaceshipPosition.x + (spaceshipWidth) / 2;
-        float centerY = spaceshipPosition.y + (spaceshipHeight) / 2;
+        float centerX = spaceshipPosition.x + (spaceshipWidth) / 2f;
+        float centerY = spaceshipPosition.y + (spaceshipHeight) / 2f;
 
         // Calcula o deslocamento para posicionar o tiro no bico da nave
-        float offsetFromCenter = spaceshipHeight / 2;  // Base padrão no bico superior/inferior
+        float offsetFromCenter = spaceshipHeight / 2f;  // Base padrão no bico superior/inferior
         float bulletOffsetX = MathUtils.cosDeg(this.angle) * offsetFromCenter;
         float bulletOffsetY = MathUtils.sinDeg(this.angle) * offsetFromCenter;
     
         // Posiciona o tiro no bico da nave considerando o ângulo
-        float bullet_x = centerX + bulletOffsetX - (bulletWidth / 2);
-        float bullet_y = centerY + bulletOffsetY - (bulletHeight / 2);
+        float bulletX = centerX + bulletOffsetX - (bulletWidth / 2f);
+        float bulletY = centerY + bulletOffsetY - (bulletHeight / 2f);
     
-        position = new Vector2(bullet_x, bullet_y);
+        position = new Vector2(bulletX, bulletY);
         bounds = new Rectangle(position.x, position.y, bulletWidth, bulletHeight);
     }
 
@@ -71,7 +71,7 @@ public class Bullet {
 
         batch.draw(texture, 
         position.x, position.y, 
-        texture.getWidth() / 2, texture.getHeight() / 2, 
+        texture.getWidth() / 2f, texture.getHeight() / 2f, 
         texture.getWidth(), texture.getHeight(), 
         this.scale, this.scale, 
         angle+90, 0, 0, 
@@ -86,7 +86,7 @@ public class Bullet {
     }
 
     public void dispose() {
-        // texture.dispose();
+        // Resources are managed by TextureManager
 
     }
 }

@@ -19,7 +19,7 @@ public class Alien {
     private Rectangle bounds;
     private float deathTimer = Gdx.graphics.getDeltaTime();
     private boolean isMarkedForRemoval = false;
-    private final float TIME_TO_REMOVE = 2; // Tempo em segundos antes da remoção
+    private static final float TIME_TO_REMOVE = 2f; // Tempo em segundos antes da remoção
 
     private int movementPattern;
     private float elapsedTime;
@@ -27,10 +27,10 @@ public class Alien {
     private float waveFrequency;
     private float radiusDecay;
     private float angleSpeed;
-    private int signal_x;
-    private int signal_y;
+    private int signalX;
+    private int signalY;
 
-    public Alien(TextureManager textureManager, Vector2 position, float scale, int textureType, float speed, Spaceship spaceship, int movementPattern) {
+    public Alien(TextureManager textureManager, Vector2 position, float scale, int textureType, float speed, int movementPattern) {
         this.position = position;
         this.scale = scale;
         this.speed = speed;
@@ -63,8 +63,8 @@ public class Alien {
 
         elapsedTime = MathUtils.random(0, 5); // Randomize the starting time (0 to 5 seconds)
 
-        signal_x = MathUtils.random(0, 1) == 0 ? -1 : 1;
-        signal_y = MathUtils.random(0, 1) == 0 ? -1 : 1;
+        signalX = MathUtils.random(0, 1) == 0 ? -1 : 1;
+        signalY = MathUtils.random(0, 1) == 0 ? -1 : 1;
 
     }
 
@@ -170,8 +170,8 @@ public class Alien {
         float angle = angleSpeed * elapsedTime;
     
         // Atualiza a posição do alien usando as coordenadas polares convertidas para cartesianas
-        position.x = naveCenterX + (signal_x*radius) * (float) Math.cos(angle);
-        position.y = naveCenterY + (signal_y*radius) * (float) Math.sin(angle);
+        position.x = naveCenterX + (signalX*radius) * (float) Math.cos(angle);
+        position.y = naveCenterY + (signalY*radius) * (float) Math.sin(angle);
     
         // Ajusta a posição do retângulo de limites
         bounds.setPosition(position.x, position.y);
@@ -224,6 +224,6 @@ public class Alien {
     }
 
     public void dispose() {
-        // texture.dispose();
+        // Resources are managed by TextureManager
     }
 }

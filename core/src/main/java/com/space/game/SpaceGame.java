@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Logger;
 
 public class SpaceGame extends ApplicationAdapter {
 
-    static private Game game;
+    private static Game game;
     private static final Logger LOGGER = new Logger(SpaceGame.class.getName(), Logger.DEBUG);
 
     @Override
@@ -14,7 +14,7 @@ public class SpaceGame extends ApplicationAdapter {
         Gdx.app.setLogLevel(Logger.DEBUG);
         // Captura o cursor para fazer ele desaparecer
         Gdx.input.setCursorCatched(true);
-        game = new Game();
+        SpaceGame.game = new Game();
     }
     @Override
     public void render() {
@@ -32,11 +32,11 @@ public class SpaceGame extends ApplicationAdapter {
 
     }
 
-    static public Game getGame() {
+    public static Game getGame() {
         return game;
     }   
 
-    static public Logger getLogger() {
+    public static Logger getLogger() {
         return LOGGER;
     }
     
