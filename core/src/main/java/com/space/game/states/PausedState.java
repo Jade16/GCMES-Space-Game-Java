@@ -48,6 +48,12 @@ public class PausedState implements GameStateInterface {
         return State.PAUSED;
     }
 
+    @Override
+    public void exit() {
+        // Implementação do método exit - pode ser usado para limpeza quando saindo do estado pausado
+        // Por enquanto deixamos vazio, mas pode ser expandido conforme necessário
+    }
+
     private void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             if (wasPlaying) {

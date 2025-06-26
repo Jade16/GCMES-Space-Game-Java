@@ -27,7 +27,7 @@ public class Game {
         batch = new SpriteBatch();
 
         extendViewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        extendViewport.getCamera().position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        extendViewport.getCamera().position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
         textureManager = new TextureManager();
         textureManager.loadTextures(textureManager);
